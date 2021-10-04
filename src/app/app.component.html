@@ -1,0 +1,9 @@
+<button (click)="_createTodo()">Create Todo</button>
+<button (click)="_deleteTodo()">Delete Todo</button>
+<button (click)="_tickOffTodo()">Tick off Todo</button>
+
+<hr>
+<div>{{ todos$ | async }}</div>
+<div *ngFor="let todo of (todos$ | async)">
+  <div>{{ todo.title }}</div>
+</div>
