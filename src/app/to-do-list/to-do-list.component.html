@@ -1,0 +1,16 @@
+<div>
+    <app-to-do-item *ngFor="let item of toDoItems | async"
+                    [id]="item.id"
+                    [isCompleted]="item.isCompleted"
+                    [title]="item.title"
+                    (onItemClick)="itemClick($event)">
+    </app-to-do-item>
+</div>
+<div>
+    <input type="text"
+           #inputValue
+           [value]="inputValue.value">
+    <input type="button"
+           value="Add"
+           (click)="addItem(inputValue.value)">
+</div>

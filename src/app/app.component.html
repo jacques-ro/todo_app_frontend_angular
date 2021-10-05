@@ -3,7 +3,4 @@
 <button (click)="_tickOffTodo()">Tick off Todo</button>
 
 <hr>
-<div>{{ todos$ | async }}</div>
-<div *ngFor="let todo of (todos$ | async)">
-  <div>{{ todo.title }}</div>
-</div>
+<app-to-do-list></app-to-do-list>

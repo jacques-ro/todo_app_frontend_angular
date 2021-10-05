@@ -7,11 +7,15 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import * as fromApp from './state/todos.reducer';
+import { ToDoItemComponent } from './to-do-item/to-do-item.component';
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToDoItemComponent,
+    ToDoListComponent
   ],
   imports: [
     BrowserModule,
