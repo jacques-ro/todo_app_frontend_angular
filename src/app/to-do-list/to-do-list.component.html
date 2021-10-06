@@ -8,9 +8,16 @@
 </div>
 <div>
     <input type="text"
-           #inputValue
-           [value]="inputValue.value">
+           [(ngModel)]="toDoValue"
+           required>
     <input type="button"
            value="Add"
-           (click)="addItem(inputValue.value)">
+           (click)="addItem()">
+</div>
+<div class="ticked-off-todos">
+    <app-to-do-item *ngFor="let tickedOffItem of tickedOffToDoItems | async"
+                    [id]="tickedOffItem.id"
+                    [isCompleted]="tickedOffItem.isCompleted"
+                    [title]="tickedOffItem.title">
+    </app-to-do-item>
 </div>
