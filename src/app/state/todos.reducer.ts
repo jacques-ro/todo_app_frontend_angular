@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
-import { Todo, TodoState } from '.';
+import { TodoState, Todo } from "../models";
 import * as TodoActions from './todos.actions';
 
 export const appStateKey = 'app';
@@ -49,17 +49,21 @@ export const reducer = createReducer(
 
     return newState;
   }),
-  on(TodoActions.tickOffTodo, (state, { id }) => {
+  on(TodoActions.toggleCompleted, (state, { id }) => {
     const newState = { ...state };
 
     newState.todos = state.todos.map((item) => {
       if (item.id === id) {
-        return { ...item, isCompleted: true };
+        if (item.isCompleted) {
+          return { ...item, isCompleted: false };
+        } else {
+          return { ...item, isCompleted: true };
+        }
       } else {
         return item;
       }
     });
 
     return newState;
-  }),
+  })
 );

@@ -1,12 +1,3 @@
-export interface Todo {
-  id: string;
-  title: string;
-  isCompleted: boolean;
-}
-
-export interface TodoState {
-  todos: Todo[];
-}
-
-export const selectTodos = (state: TodoState) => state.todos;
-
+export * from './todos.actions';
+export * from './todos.reducer';
+export * from './todos.selector';

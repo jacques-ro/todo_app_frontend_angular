@@ -10,16 +10,22 @@ export class ToDoItemComponent {
   @Input() public isCompleted: boolean;
   @Input() public title: string;
 
-  @Output() public onItemClick: EventEmitter<string>;
+  @Output() public toggleCompleteClick: EventEmitter<string>;
+  @Output() public deleteClick: EventEmitter<string>;
 
   constructor() {
     this.id = '1';
     this.isCompleted = false;
     this.title = 'DefaulTitle';
-    this.onItemClick = new EventEmitter();
+    this.toggleCompleteClick = new EventEmitter();
+    this.deleteClick = new EventEmitter();
   }
 
-  public itemClick(_event: MouseEvent): void {
-    this.onItemClick.emit(this.id);
+  public onToggleCompleteClick(_event: MouseEvent): void {
+    this.toggleCompleteClick.emit(this.id);
+  }
+
+  public onDeleteClick(_event: MouseEvent): void {
+    this.deleteClick.emit(this.id);
   }
 }

@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { Todo } from "../state";
-import { tickOffTodo, createTodo } from "../state/todos.actions";
-import { selectCheckedToDos, selectToDos } from "../state/todos.selector";
+import { Todo } from "../models";
 
 @Component({
   selector: 'app-to-do-list',
@@ -11,23 +8,21 @@ import { selectCheckedToDos, selectToDos } from "../state/todos.selector";
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent {
-  public toDoItems: Observable<Todo[] | undefined>;
-  public tickedOffToDoItems: Observable<Todo[] | undefined>;
-  public toDoValue: string;
+  @Input() public todos: Todo[];
+  @Output() public toggleCompleteClick: EventEmitter<string>;
+  @Output() public deleteClick: EventEmitter<string>;
 
   constructor(private store: Store) {
-    this.toDoItems = store.select(selectToDos);
-    this.tickedOffToDoItems = store.select(selectCheckedToDos);
-    this.toDoValue = "";
+    this.toggleCompleteClick = new EventEmitter();
+    this.deleteClick = new EventEmitter();
+    this.todos = [];
   }
 
-  public itemClick(id: string): void {
-    this.store.dispatch(tickOffTodo({ id }));
+  public onToggleCompleteClick(id: string): void {
+    this.toggleCompleteClick.emit(id);
   }
 
-  public addItem(): void {
-    if (this.toDoValue.length === 0) return;
-    this.store.dispatch(createTodo({ title: this.toDoValue }));
-    this.toDoValue = "";
+  public onDeleteClick(id: string): void {
+    this.deleteClick.emit(id);
   }
 }

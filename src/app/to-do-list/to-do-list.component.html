@@ -1,23 +1,9 @@
 <div>
-    <app-to-do-item *ngFor="let item of toDoItems | async"
+    <app-to-do-item *ngFor="let item of todos"
                     [id]="item.id"
                     [isCompleted]="item.isCompleted"
                     [title]="item.title"
-                    (onItemClick)="itemClick($event)">
-    </app-to-do-item>
-</div>
-<div>
-    <input type="text"
-           [(ngModel)]="toDoValue"
-           required>
-    <input type="button"
-           value="Add"
-           (click)="addItem()">
-</div>
-<div class="ticked-off-todos">
-    <app-to-do-item *ngFor="let tickedOffItem of tickedOffToDoItems | async"
-                    [id]="tickedOffItem.id"
-                    [isCompleted]="tickedOffItem.isCompleted"
-                    [title]="tickedOffItem.title">
+                    (toggleCompleteClick)="onToggleCompleteClick($event)"
+                    (deleteClick)="onDeleteClick($event)">
     </app-to-do-item>
 </div>
