@@ -1,9 +1,16 @@
-<button (click)="_createTodo()">Create Todo</button>
-<button (click)="_deleteTodo()">Delete Todo</button>
-<button (click)="_tickOffTodo()">Tick off Todo</button>
+<app-to-do-list [todos]="(todos$ | async)!"
+                (toggleCompleteClick)="onToggleCompleteClick($event)"
+                (deleteClick)="onDeleteClick($event)"></app-to-do-list>
 
-<hr>
-<div>{{ todos$ | async }}</div>
-<div *ngFor="let todo of (todos$ | async)">
-  <div>{{ todo.title }}</div>
+<div>
+    <input type="text"
+           [(ngModel)]="todoValue"
+           required>
+    <input type="button"
+           value="Add"
+           (click)="addItem()">
 </div>
+
+<app-to-do-list [todos]="(completedTodos$ | async)!"
+                (toggleCompleteClick)="onToggleCompleteClick($event)"
+                (deleteClick)="onDeleteClick($event)"></app-to-do-list>

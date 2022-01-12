@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectTodos, Todo, TodoState } from './state';
-import { createTodo, deleteTodo, tickOffTodo } from './state/todos.actions';
+import { Todo, TodoState } from "./models";
+import { createTodo, deleteTodo, selectCompletedToDos, selectToDos, toggleCompleted } from './state';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +10,27 @@ import { createTodo, deleteTodo, tickOffTodo } from './state/todos.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  todos$: Observable<Todo[]>;
+  public todos$: Observable<Todo[]>;
+  public completedTodos$: Observable<Todo[]>;
+  public todoValue: string;
 
   constructor(private store: Store<TodoState>) {
-    this.todos$ = store.select(selectTodos);
-
-    this.todos$.subscribe(next => console.log(next));
+    this.todos$ = store.select(selectToDos);
+    this.completedTodos$ = store.select(selectCompletedToDos);
+    this.todoValue = "";
   }
 
-  _createTodo() {
-    this.store.dispatch(createTodo({ title: 'test'}));
+  public addItem(): void {
+    if (this.todoValue.length === 0) return;
+    this.store.dispatch(createTodo({ title: this.todoValue }));
+    this.todoValue = '';
   }
 
-  _deleteTodo() {
-    this.store.dispatch(deleteTodo({ id: '1'}));
+  public onToggleCompleteClick(id: string): void {
+    this.store.dispatch(toggleCompleted({ id }));
   }
 
-  _tickOffTodo() {
-    this.store.dispatch(tickOffTodo({ id: '1'}));
+  public onDeleteClick(id: string): void {
+    this.store.dispatch(deleteTodo({ id }));
   }
 }

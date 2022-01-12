@@ -1,0 +1,5 @@
+<div>
+    <input type="checkbox"
+           [checked]="isCompleted"
+           (click)="onToggleCompleteClick($event)"> {{title}} <span (click)="onDeleteClick($event)"> | delete</span>
+</div>

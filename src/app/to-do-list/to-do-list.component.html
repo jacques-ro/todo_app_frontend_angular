@@ -1,0 +1,9 @@
+<div>
+    <app-to-do-item *ngFor="let item of todos"
+                    [id]="item.id"
+                    [isCompleted]="item.isCompleted"
+                    [title]="item.title"
+                    (toggleCompleteClick)="onToggleCompleteClick($event)"
+                    (deleteClick)="onDeleteClick($event)">
+    </app-to-do-item>
+</div>
