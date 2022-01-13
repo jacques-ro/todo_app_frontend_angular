@@ -1,5 +1,9 @@
-<div>
-    <input type="checkbox"
-           [checked]="isCompleted"
-           (click)="onToggleCompleteClick($event)"> {{title}} <span (click)="onDeleteClick($event)"> | delete</span>
-</div>
+<mat-card>
+  <div>
+    <mat-checkbox [checked]="isCompleted" (click)="onToggleCompleteClick($event)"></mat-checkbox>
+    <span [ngClass]="{'strikethrough': isCompleted}">{{title}}</span>
+  </div>
+  <button mat-icon-button aria-label="Delete Todo" (click)="onDeleteClick($event)">
+    <mat-icon>delete_outline</mat-icon>
+  </button>
+</mat-card>

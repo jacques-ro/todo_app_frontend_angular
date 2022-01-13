@@ -1,16 +1,28 @@
-<app-to-do-list [todos]="(todos$ | async)!"
-                (toggleCompleteClick)="onToggleCompleteClick($event)"
-                (deleteClick)="onDeleteClick($event)"></app-to-do-list>
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>Add a todo</mat-label>
+    <input name="todoValue" matInput placeholder="What are your plans..." [(ngModel)]="todoValue">
+  </mat-form-field>
+  <button mat-stroked-button color="primary" (click)="addItem()">Add Todo</button>
+</form>
 
-<div>
-    <input type="text"
-           [(ngModel)]="todoValue"
-           required>
-    <input type="button"
-           value="Add"
-           (click)="addItem()">
-</div>
+<mat-card class="todos">
+  <h3>Todos</h3>
+  <app-to-do-list
+    [todos]="(todos$ | async)!"
+    (toggleCompleteClick)="onToggleCompleteClick($event)"
+    (deleteClick)="onDeleteClick($event)">
+  </app-to-do-list>
+</mat-card>
 
-<app-to-do-list [todos]="(completedTodos$ | async)!"
-                (toggleCompleteClick)="onToggleCompleteClick($event)"
-                (deleteClick)="onDeleteClick($event)"></app-to-do-list>
+<ng-container *ngIf="(completedTodos$ | async)?.length">
+  <mat-card class="completed-todos">
+    <h3>Completed</h3>
+    <app-to-do-list
+      [todos]="(completedTodos$ | async)!"
+      (toggleCompleteClick)="onToggleCompleteClick($event)"
+      (deleteClick)="onDeleteClick($event)">
+    </app-to-do-list>
+  </mat-card>
+</ng-container>
+

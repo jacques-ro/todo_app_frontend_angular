@@ -1,0 +1,14 @@
+mat-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+span {
+  margin-left: 16px;
+}
+
+span.strikethrough {
+  text-decoration: line-through;
+}
